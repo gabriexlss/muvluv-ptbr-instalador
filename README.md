@@ -1,36 +1,37 @@
-# Muv-Luv PT-BR Patcher (`muvluv-ptbr-instalador`)
+# Instalador da Tradução PT-BR de Muv-Luv Extra/Unlimited
 
-Instalador gráfico leve e em **1 clique** feito em **Tauri v2 + Rust puro + React** para aplicar a tradução **PT-BR** de **Muv-Luv (Extra & Unlimited — Steam 2016 + Director's Cut 18+)** diretamente na máquina do jogador no Windows, sem precisar de Python, Go ou terminal.
+programa feito com auxilio de IA para instalar a tradução automaticamente no jogo com apenas alguns cliques.
 
-## Recursos
 
-- **Motor rUGP em Rust puro (`crates/muvluv-core`)**: lê `muvluv16.rio.ici`, `muvluv16.rio` e `muvluv16.rio.drcruo1`, reconstrói todos os registros `CRsa` traduzidos com recálculo completo dos checksums rUGP e executa readback byte a byte antes da troca atômica do arquivo final.
-- **Autodetecção da pasta do jogo**: lê o Registro do Windows (Steam / App `449830` / AGES3), `libraryfolders.vdf` e caminhos comuns, além de permitir seleção manual.
-- **Backup seguro e restauração em 1 clique**: preserva permanentemente o overlay original em `<gameDir>/_ptbr_backup/muvluv16.rio.drcruo1.orig` (nunca sobrescreve `.orig` existente) e sempre compila atualizações a partir do arquivo limpo.
-- **Download automático + Modo Offline**: baixa automaticamente `muvluv-ptbr-translation.zip` da Release mais recente de [`gabriexlss/muvluv-ptbr-traducao`](https://github.com/gabriexlss/muvluv-ptbr-traducao) e valida o SHA-256 de todos os 102 JSONs (`63.242` entradas) antes de tocar no jogo — ou permite selecionar um `.zip` / pasta local.
-- **Patch opcional `.5RF` (fallback GDI)**: checkbox opcional para corrigir acentos raros na fonte bitmap embutida em `muvluv16.exe`, com validação rigorosa de SHA-256 + contexto de bytes e backup automático em `_ptbr_backup/muvluv16.exe.orig`.
+## 📥 Como instalar (Passo a Passo)
 
-## Estrutura do Projeto
+1. **Baixe o instalador:**
+   * Acesse a aba [**Releases**](https://github.com/gabriexlss/muvluv-ptbr-instalador/releases) aqui no GitHub.
+   * Baixe o arquivo `.exe` da versão mais recente.
+2. **Abra o programa:**
+   * Dê um duplo clique no arquivo baixado.
+   * *(Nota: Como é um programa feito por fãs, o Windows pode mostrar um aviso de "Windows protegeu o computador". Basta clicar em **Mais informações** e depois em **Executar assim mesmo**).*
+3. **Selecione a pasta do jogo:**
+   * O instalador tentará encontrar o seu jogo automaticamente. Caso não encontre, clique em **Procurar** e selecione a pasta onde o *Muv-Luv* está instalado na sua Steam (geralmente em `C:\Program Files (x86)\Steam\steamapps\common\Muv-Luv`).
+4. **Conclua a instalação:**
+   * Clique em **Instalar** e aguarde a barra carregar. Quando aparecer a mensagem de sucesso, é só abrir o jogo pela Steam e aproveitar!
 
-- `crates/muvluv-core/`: motor rUGP (`crypto`, `ici`, `ruo`, `crsa`), pipeline de extração/validação/compilação, backup seguro e patch `.5RF`.
-- `src-tauri/`: aplicação Tauri v2, comandos IPC, autodetecção Steam/Win32 e download de releases (`src-tauri/src/config.rs`).
-- `src/`: interface React + TypeScript + Tailwind CSS + shadcn/ui.
-- `.github/workflows/build-windows.yml`: build automático no `windows-latest` gerando instalador NSIS (`.exe`), executável portátil e `SHA256SUMS.txt`.
 
-## Desenvolvimento (Linux / WSL)
+## ❓ Dúvidas Frequentes
 
-```bash
-pnpm install
-pnpm build
-cargo test -p muvluv-core
-cargo check --workspace
-```
+**Preciso baixar os arquivos da tradução separadamente?**
+Não! O próprio instalador já baixa e aplica tudo o que você precisa automaticamente.
 
-## Publicar Nova Release Windows
+**Funciona na versão da Steam?**
+Sim, o instalador foi feito pensando na versão oficial da Steam.
 
-```bash
-git tag v1.0.0
-git push origin main --tags
-```
+**Como faço para voltar o jogo para o inglês?**
+Abra a sua Steam, clique com o botão direito em **Muv-Luv** > **Propriedades** > **Arquivos Instalados** > **Verificar integridade dos arquivos**. A Steam vai restaurar os arquivos originais em segundos.
 
-O workflow `.github/workflows/build-windows.yml` compila automaticamente no Windows e anexa o instalador NSIS e o binário portátil na GitHub Release.
+**Encontrei um erro de texto no jogo ou um bug no instalador, onde aviso?**
+* Problemas com o **instalador**: abra uma [Issue aqui](https://github.com/gabriexlss/muvluv-ptbr-instalador/issues).
+* Erros de **tradução ou texto**: avise no [repositório oficial da tradução](https://github.com/gabriexlss/muvluv-ptbr-traducao/issues).
+
+
+## 🔗 Links Úteis
+* [Repositório dos Arquivos da Tradução (`muvluv-ptbr-traducao`)](https://github.com/gabriexlss/muvluv-ptbr-traducao)
