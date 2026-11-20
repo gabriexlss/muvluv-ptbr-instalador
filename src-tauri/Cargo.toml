@@ -1,0 +1,40 @@
+[package]
+name = "muvluv-ptbr-instalador"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Instalador gráfico em 1 clique da tradução PT-BR de Muv-Luv (Steam 2016 + Director's Cut 18+)"
+
+[lib]
+name = "muvluv_ptbr_instalador_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+anyhow = "1"
+futures-util = "0.3"
+hex = "0.4"
+muvluv-core = { path = "../crates/muvluv-core" }
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls", "stream"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+tauri-plugin-opener = "2"
+tempfile = "3"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "sync", "time"] }
+zip = { version = "2", default-features = false, features = ["deflate"] }
+
+[target.'cfg(windows)'.dependencies]
+winreg = "0.52"
+windows-sys = { version = "0.59", features = [
+  "Win32_Foundation",
+  "Win32_Storage_FileSystem",
+  "Win32_System_Diagnostics_ToolHelp",
+] }
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
